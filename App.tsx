@@ -6,33 +6,29 @@
  */
 
 import React from 'react';
-import type {PropsWithChildren} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+import {SafeAreaView, StatusBar, StyleSheet, View} from 'react-native';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
 import {Main} from './src/Main';
 
 function App(): JSX.Element {
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.view}>
       <StatusBar barStyle="light-content" backgroundColor="black" />
-      <Main />
+      <View style={styles.body}>
+        <Main />
+      </View>
     </SafeAreaView>
   );
 }
+
+const styles = StyleSheet.create({
+  view: {
+    width: '100%',
+    height: '100%',
+  },
+  body: {
+    flex: 1,
+  },
+});
 
 export default App;
