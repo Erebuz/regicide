@@ -9,14 +9,18 @@ import React from 'react';
 import {SafeAreaView, StatusBar, StyleSheet} from 'react-native';
 
 import {Main} from './src/Main';
+import {Provider} from 'react-redux';
+import {store} from './src/redux/store';
 
 function App(): JSX.Element {
   return (
-    <SafeAreaView style={styles.view}>
-      <StatusBar barStyle="light-content" backgroundColor="black" />
+    <Provider store={store}>
+      <SafeAreaView style={styles.view}>
+        <StatusBar barStyle="light-content" backgroundColor="black" />
 
-      <Main />
-    </SafeAreaView>
+        <Main />
+      </SafeAreaView>
+    </Provider>
   );
 }
 
