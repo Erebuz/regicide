@@ -3,7 +3,7 @@ import stateReducer from './baseSlice';
 
 export const store = configureStore({
   reducer: {
-    message: stateReducer,
+    base: stateReducer,
   },
 });
 

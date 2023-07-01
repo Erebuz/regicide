@@ -1,6 +1,6 @@
 import {Dimensions, StyleSheet, View} from 'react-native';
-import {Court} from '../component/Court';
-import {StatComponent} from '../component/StatComponent';
+import {Court} from './component/Court';
+import {StatComponent} from './component/StatComponent';
 import {useEffect, useState} from 'react';
 
 function getIsPortrait() {
@@ -26,11 +26,11 @@ export const Main = () => {
           flexDirection: isPortrait ? 'column' : 'row',
         }}>
         <View style={{...styles.stat, width: isPortrait ? '100%' : '50%'}}>
-          <StatComponent />
+          <StatComponent type={'health'} />
         </View>
 
         <View style={{...styles.stat, width: isPortrait ? '100%' : '50%'}}>
-          <StatComponent />
+          <StatComponent type={'weapon'} />
         </View>
       </View>
     </View>
@@ -39,7 +39,7 @@ export const Main = () => {
 
 const styles = StyleSheet.create({
   main: {
-    flex: 1
+    flex: 1,
   },
   statsWrapper: {display: 'flex'},
   stat: {},
