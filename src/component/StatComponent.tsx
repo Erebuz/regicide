@@ -1,4 +1,4 @@
-import {Button, Text} from 'react-native';
+import {Button, StyleSheet, Text, TouchableHighlight, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../redux/store';
 import {updateHealth, updateWeapon} from '../redux/baseSlice';
@@ -19,16 +19,57 @@ export const StatComponent = (props: StatProps) => {
   };
 
   return (
-    <>
-      <Text>
+    <View style={styles.statBlock}>
+      <Text style={styles.text}>
         {props.type.at(0)?.toUpperCase()} {stat}
       </Text>
 
-      <Button title="+1" onPress={() => handlePress(1)} />
+      <View style={styles.buttons}>
+        <TouchableHighlight
+          onPress={() => handlePress(1)}
+          style={styles.button}>
+          <Text>+1</Text>
+        </TouchableHighlight>
 
-      <Button title="-1" onPress={() => handlePress(-1)} />
+        <TouchableHighlight
+          onPress={() => handlePress(-1)}
+          style={styles.button}>
+          <Text>-1</Text>
+        </TouchableHighlight>
 
-      <Button title="-5" onPress={() => handlePress(-5)} />
-    </>
+        <TouchableHighlight
+          onPress={() => handlePress(-5)}
+          style={styles.button}>
+          <Text>-5</Text>
+        </TouchableHighlight>
+      </View>
+    </View>
   );
 };
+
+const styles = StyleSheet.create({
+  statBlock: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+
+  text: {
+    fontSize: 40,
+    color: 'white',
+  },
+
+  buttons: {
+    display: 'flex',
+    flexDirection: 'row',
+  },
+
+  button: {
+    width: 50,
+    height: 50,
+    margin: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'lightblue',
+    borderRadius: 10,
+  },
+});

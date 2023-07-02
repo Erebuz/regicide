@@ -7,40 +7,91 @@ import {
 } from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../redux/store';
-import Svg from 'react-native-svg';
-import {Face, setFaceState, setNewFace} from '../redux/baseSlice';
+import {Face, setNewFace} from '../redux/baseSlice';
+import {globalStyles} from './styles';
 
-export const Court = () => {
+type CourtProps = {
+  isPortrait: boolean;
+};
+
+export const Court = (props: CourtProps) => {
   const faces = useSelector((state: RootState) => state.base.faces);
 
   const dispatch = useDispatch();
 
-  const handlePress = (type: Face) => {
+  const handlePress = (type: any) => {
     dispatch(setNewFace(type));
   };
 
   return (
-    <View style={styles.body}>
-      {Object.entries(faces).map(([name, state]) => (
-        <TouchableOpacity
-          key={name}
-          onPress={() => handlePress(name.split('_')[0])}>
-          <View style={styles.item}>
-            <Text>{name.at(0)?.toUpperCase()}</Text>
-            <Text>{name.split('_')[1].at(0)?.toUpperCase()}</Text>
-          </View>
-        </TouchableOpacity>
-      ))}
+    <View
+      style={{
+        ...styles.body,
+        flexDirection: props.isPortrait ? 'column' : 'row',
+      }}>
+      <View
+        style={{
+          width: props.isPortrait ? '100%' : '50%',
+          flexDirection: 'row',
+        }}>
+        {Object.entries(faces)
+          .slice(0, 6)
+          .map(([name, state]) => {
+            return (
+              <TouchableHighlight
+                key={name}
+                onPress={() => handlePress(name.split('_')[0])}
+                style={styles.item}
+                underlayColor={globalStyles.touchArea.color}>
+                <View>
+                  <Text>{name.at(0)?.toUpperCase()}</Text>
+                  <Text>{name.split('_')[1].at(0)?.toUpperCase()}</Text>
+                </View>
+              </TouchableHighlight>
+            );
+          })}
+      </View>
+
+      <View
+        style={{
+          width: props.isPortrait ? '100%' : '50%',
+          flexDirection: 'row',
+        }}>
+        {Object.entries(faces)
+          .slice(6)
+          .map(([name, state]) => {
+            return (
+              <TouchableHighlight
+                key={name}
+                onPress={() => handlePress(name.split('_')[0])}
+                style={styles.item}
+                underlayColor={globalStyles.touchArea.color}>
+                <View>
+                  <Text>{name.at(0)?.toUpperCase()}</Text>
+                  <Text>{name.split('_')[1].at(0)?.toUpperCase()}</Text>
+                </View>
+              </TouchableHighlight>
+            );
+          })}
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   body: {
-    display: 'flex',
+    width: '100%',
+    height: 60,
     flexDirection: 'row',
   },
+  block: {
+    height: '100%',
+  },
   item: {
-    margin: 10,
+    height: '100%',
+    flexGrow: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    ...globalStyles.touchArea,
   },
 });

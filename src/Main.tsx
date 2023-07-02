@@ -2,6 +2,7 @@ import {Dimensions, StyleSheet, View} from 'react-native';
 import {Court} from './component/Court';
 import {StatComponent} from './component/StatComponent';
 import {useEffect, useState} from 'react';
+import {GlobalAction} from './component/GlobalAction';
 
 function getIsPortrait() {
   const screen = Dimensions.get('screen');
@@ -18,21 +19,23 @@ export const Main = () => {
 
   return (
     <View style={styles.main}>
-      <Court />
+      <Court isPortrait={isPortrait} />
 
       <View
         style={{
           ...styles.statsWrapper,
           flexDirection: isPortrait ? 'column' : 'row',
         }}>
-        <View style={{...styles.stat, width: isPortrait ? '100%' : '50%'}}>
+        <View style={{width: isPortrait ? '100%' : '50%'}}>
           <StatComponent type={'health'} />
         </View>
 
-        <View style={{...styles.stat, width: isPortrait ? '100%' : '50%'}}>
+        <View style={{width: isPortrait ? '100%' : '50%'}}>
           <StatComponent type={'weapon'} />
         </View>
       </View>
+
+      <GlobalAction />
     </View>
   );
 };
@@ -40,7 +43,11 @@ export const Main = () => {
 const styles = StyleSheet.create({
   main: {
     flex: 1,
+    justifyContent: 'space-between',
+    backgroundColor: 'black',
   },
-  statsWrapper: {display: 'flex'},
-  stat: {},
+  statsWrapper: {
+    display: 'flex',
+    justifyContent: 'space-between',
+  },
 });
