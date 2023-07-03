@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../redux/store';
 import {Face, Faces, setNewFace} from '../redux/baseSlice';
 import {globalStyles} from './styles';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 type CourtProps = {
   isPortrait: boolean;
@@ -48,6 +49,22 @@ export const Court = (props: CourtProps) => {
     }
   }
 
+  function getSuit(name: keyof Faces) {
+    const suit = name.split('_').at(1);
+
+    if (suit === 'clubs') {
+      return 'cards-club-outline';
+    } else if (suit === 'diamonds') {
+      return 'cards-diamond-outline';
+    } else if (suit === 'spades') {
+      return 'cards-spade-outline';
+    } else if (suit === 'hearts') {
+      return 'cards-heart-outline';
+    } else {
+      return '';
+    }
+  }
+
   const faceFactory = ([name, state]: [string, boolean]) => {
     return (
       <TouchableHighlight
@@ -64,8 +81,11 @@ export const Court = (props: CourtProps) => {
         }}
         underlayColor={globalStyles.touchArea.color}>
         <View>
-          <Text>{name.at(0)?.toUpperCase()}</Text>
-          <Text>{name.split('_')[1].at(0)?.toUpperCase()}</Text>
+          <View style={styles.textWrapper}>
+            <Text style={styles.text}>{name.at(0)?.toUpperCase()}</Text>
+          </View>
+
+          <Icon name={getSuit(name as keyof Faces)} size={styles.item.width} />
         </View>
       </TouchableHighlight>
     );
@@ -116,10 +136,20 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
   },
   item: {
-    height: 70,
-    width: 70,
+    height: 60,
+    width: 60,
     justifyContent: 'center',
     alignItems: 'center',
     ...globalStyles.touchArea,
+  },
+  textWrapper: {
+    position: 'absolute',
+    left: 3,
+    bottom: 0,
+  },
+  text: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: 'black',
   },
 });

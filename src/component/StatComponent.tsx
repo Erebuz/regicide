@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../redux/store';
 import {updateHealth, updateWeapon} from '../redux/baseSlice';
 import {globalStyles} from './styles';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 export type StatProps = {
   type: 'weapon' | 'health';
@@ -21,9 +22,15 @@ export const StatComponent = (props: StatProps) => {
 
   return (
     <View style={styles.statBlock}>
-      <Text style={styles.text}>
-        {props.type.at(0)?.toUpperCase()} {stat}
-      </Text>
+      <View style={styles.statWrapper}>
+        <Icon
+          name={props.type === 'weapon' ? 'sword' : 'heart'}
+          size={40}
+          style={styles.icon}
+        />
+
+        <Text style={styles.text}>{stat}</Text>
+      </View>
 
       <View style={styles.buttons}>
         <TouchableHighlight
@@ -57,6 +64,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 
+  statWrapper: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: 90,
+  },
+
+  icon: {
+    color: 'red',
+    marginRight: 10,
+    marginTop: 2,
+  },
+
   text: {
     fontSize: 40,
     color: 'white',
@@ -69,8 +89,8 @@ const styles = StyleSheet.create({
   },
 
   button: {
-    width: 60,
-    height: 60,
+    width: 50,
+    height: 50,
     margin: 20,
     alignItems: 'center',
     justifyContent: 'center',

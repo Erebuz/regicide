@@ -2,6 +2,8 @@ import {StyleSheet, Text, TouchableHighlight, View} from 'react-native';
 import {globalStyles} from './styles';
 import {useDispatch} from 'react-redux';
 import {killFace, refreshAll, restoreFace} from '../redux/baseSlice';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 export const GlobalAction = () => {
   const dispatch = useDispatch();
@@ -25,7 +27,7 @@ export const GlobalAction = () => {
         style={styles.button}
         underlayColor={globalStyles.touchArea.color}>
         <View>
-          <Text>Kill</Text>
+          <Icon name="skull-crossbones-outline" size={styles.button.width} />
         </View>
       </TouchableHighlight>
 
@@ -34,7 +36,7 @@ export const GlobalAction = () => {
         style={styles.button}
         underlayColor={globalStyles.touchArea.color}>
         <View>
-          <Text>Res</Text>
+          <Icon name="cross-outline" size={styles.button.width} />
         </View>
       </TouchableHighlight>
 
@@ -43,7 +45,7 @@ export const GlobalAction = () => {
         style={styles.button}
         underlayColor={globalStyles.touchArea.color}>
         <View>
-          <Text>Ref</Text>
+          <Icon name="restore-alert" size={styles.button.width} />
         </View>
       </TouchableHighlight>
     </View>
@@ -56,8 +58,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
   },
   button: {
-    width: 70,
-    height: 70,
+    width: 60,
+    height: 60,
     justifyContent: 'center',
     alignItems: 'center',
     ...globalStyles.touchArea,
