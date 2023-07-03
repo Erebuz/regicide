@@ -1,7 +1,8 @@
-import {Button, StyleSheet, Text, TouchableHighlight, View} from 'react-native';
+import {StyleSheet, Text, TouchableHighlight, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../redux/store';
 import {updateHealth, updateWeapon} from '../redux/baseSlice';
+import {globalStyles} from './styles';
 
 export type StatProps = {
   type: 'weapon' | 'health';
@@ -27,20 +28,23 @@ export const StatComponent = (props: StatProps) => {
       <View style={styles.buttons}>
         <TouchableHighlight
           onPress={() => handlePress(1)}
-          style={styles.button}>
-          <Text>+1</Text>
+          style={styles.button}
+          underlayColor={globalStyles.touchArea.color}>
+          <Text style={styles.buttonText}>+1</Text>
         </TouchableHighlight>
 
         <TouchableHighlight
           onPress={() => handlePress(-1)}
-          style={styles.button}>
-          <Text>-1</Text>
+          style={styles.button}
+          underlayColor={globalStyles.touchArea.color}>
+          <Text style={styles.buttonText}>-1</Text>
         </TouchableHighlight>
 
         <TouchableHighlight
           onPress={() => handlePress(-5)}
-          style={styles.button}>
-          <Text>-5</Text>
+          style={styles.button}
+          underlayColor={globalStyles.touchArea.color}>
+          <Text style={styles.buttonText}>-5</Text>
         </TouchableHighlight>
       </View>
     </View>
@@ -56,6 +60,7 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 40,
     color: 'white',
+    fontWeight: 'bold',
   },
 
   buttons: {
@@ -64,12 +69,16 @@ const styles = StyleSheet.create({
   },
 
   button: {
-    width: 50,
-    height: 50,
+    width: 60,
+    height: 60,
     margin: 20,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'lightblue',
     borderRadius: 10,
+  },
+  buttonText: {
+    fontWeight: 'bold',
+    fontSize: 26,
   },
 });

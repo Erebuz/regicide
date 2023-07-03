@@ -1,4 +1,4 @@
-import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {createSlice, PayloadAction, SliceCaseReducers} from '@reduxjs/toolkit';
 
 export type Faces = {
   jack_diamonds: boolean;
@@ -17,7 +17,17 @@ export type Faces = {
 
 export type Face = 'jack' | 'queen' | 'king';
 
-const baseSlice = createSlice({
+const baseSlice = createSlice<
+  {
+    health: number;
+    weapon: number;
+    faces: Faces;
+    currentFace: keyof Faces | null;
+    stats: Record<Face, {health: number; weapon: number}>;
+  },
+  SliceCaseReducers<any>,
+  string
+>({
   name: 'state',
   initialState: {
     health: 0,
@@ -36,6 +46,7 @@ const baseSlice = createSlice({
       king_clubs: true,
       king_spades: true,
     },
+    currentFace: null,
     stats: {
       jack: {
         health: 20,
@@ -60,9 +71,12 @@ const baseSlice = createSlice({
       const new_stat = state.weapon + action.payload;
       state.weapon = new_stat < 0 ? 0 : new_stat;
     },
-    setNewFace(state, action: PayloadAction<Face>) {
-      state.health = state.stats[action.payload].health;
-      state.weapon = state.stats[action.payload].weapon;
+    setNewFace(state, action: PayloadAction<keyof Faces>) {
+      const type = action.payload.split('_')[0] as Face;
+
+      state.health = state.stats[type].health;
+      state.weapon = state.stats[type].weapon;
+      state.currentFace = action.payload;
     },
     setFaceState(
       state,
@@ -70,9 +84,30 @@ const baseSlice = createSlice({
     ) {
       state.faces[action.payload.name] = action.payload.state;
     },
+    killFace(state) {
+      state.faces[state.currentFace] = false;
+    },
+    restoreFace(state) {
+      state.faces[state.currentFace] = true;
+    },
+    refreshAll(state) {
+      for (const key in state.faces) {
+        state.faces[key] = true;
+        state.health = 0;
+        state.weapon = 0;
+        state.currentFace = null;
+      }
+    },
   },
 });
 
-export const {updateHealth, updateWeapon, setFaceState, setNewFace} =
-  baseSlice.actions;
+export const {
+  updateHealth,
+  updateWeapon,
+  setFaceState,
+  setNewFace,
+  killFace,
+  restoreFace,
+  refreshAll,
+} = baseSlice.actions;
 export default baseSlice.reducer;
