@@ -1,9 +1,8 @@
-import {StyleSheet, Text, TouchableHighlight, View} from 'react-native';
+import {StyleSheet, TouchableHighlight, View} from 'react-native';
 import {globalStyles} from './styles';
 import {useDispatch} from 'react-redux';
 import {killFace, refreshAll, restoreFace} from '../redux/baseSlice';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 
 export const GlobalAction = () => {
   const dispatch = useDispatch();

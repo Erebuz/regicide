@@ -86,6 +86,9 @@ const baseSlice = createSlice<
     },
     killFace(state) {
       state.faces[state.currentFace] = false;
+      state.health = 0;
+      state.weapon = 0;
+      state.currentFace = null;
     },
     restoreFace(state) {
       state.faces[state.currentFace] = true;
