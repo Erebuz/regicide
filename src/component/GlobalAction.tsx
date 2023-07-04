@@ -19,34 +19,30 @@ export const GlobalAction = () => {
     dispatch(refreshAll({}));
   };
 
+  function buttonFactory(icon: string, foo: () => void) {
+    return (
+      <TouchableHighlight
+        onPress={foo}
+        style={styles.button}
+        underlayColor={globalStyles.touchArea.color}>
+        <View>
+          <Icon
+            name={icon}
+            size={styles.button.width}
+            style={globalStyles.icon}
+          />
+        </View>
+      </TouchableHighlight>
+    );
+  }
+
   return (
     <View style={styles.main}>
-      <TouchableHighlight
-        onPress={handlePressKill}
-        style={styles.button}
-        underlayColor={globalStyles.touchArea.color}>
-        <View>
-          <Icon name="skull-crossbones-outline" size={styles.button.width} />
-        </View>
-      </TouchableHighlight>
+      {buttonFactory('skull-crossbones-outline', handlePressKill)}
 
-      <TouchableHighlight
-        onPress={handlePressRestore}
-        style={styles.button}
-        underlayColor={globalStyles.touchArea.color}>
-        <View>
-          <Icon name="cross-outline" size={styles.button.width} />
-        </View>
-      </TouchableHighlight>
+      {buttonFactory('cross-outline', handlePressRestore)}
 
-      <TouchableHighlight
-        onPress={handlePressRefresh}
-        style={styles.button}
-        underlayColor={globalStyles.touchArea.color}>
-        <View>
-          <Icon name="restore-alert" size={styles.button.width} />
-        </View>
-      </TouchableHighlight>
+      {buttonFactory('restore-alert', handlePressRefresh)}
     </View>
   );
 };

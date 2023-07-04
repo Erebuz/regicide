@@ -26,7 +26,7 @@ export const StatComponent = (props: StatProps) => {
         <Icon
           name={props.type === 'weapon' ? 'sword' : 'heart'}
           size={40}
-          style={styles.icon}
+          style={{...styles.icon, ...globalStyles.iconStat}}
         />
 
         <Text style={styles.text}>{stat}</Text>
@@ -72,7 +72,6 @@ const styles = StyleSheet.create({
   },
 
   icon: {
-    color: 'red',
     marginRight: 10,
     marginTop: 2,
   },
@@ -98,6 +97,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   buttonText: {
+    color: 'black',
     fontWeight: 'bold',
     fontSize: 26,
   },

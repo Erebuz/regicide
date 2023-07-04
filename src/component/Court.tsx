@@ -65,7 +65,7 @@ export const Court = (props: CourtProps) => {
     }
   }
 
-  const faceFactory = ([name, state]: [string, boolean]) => {
+  const faceFactory = ([name, _]: [string, boolean]) => {
     return (
       <TouchableHighlight
         key={name}
@@ -85,7 +85,11 @@ export const Court = (props: CourtProps) => {
             <Text style={styles.text}>{name.at(0)?.toUpperCase()}</Text>
           </View>
 
-          <Icon name={getSuit(name as keyof Faces)} size={styles.item.width} />
+          <Icon
+            name={getSuit(name as keyof Faces)}
+            size={styles.item.width}
+            style={globalStyles.icon}
+          />
         </View>
       </TouchableHighlight>
     );

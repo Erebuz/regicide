@@ -45,23 +45,30 @@ export const Main = () => {
 
   return checkCourt() ? (
     <View style={styles.main}>
-      <Court isPortrait={isPortrait} />
-
       <View
         style={{
-          ...styles.statsWrapper,
-          flexDirection: isPortrait ? 'column' : 'row',
+          ...styles.body,
+          maxHeight: isPortrait ? 600 : 360,
+          maxWidth: isPortrait ? 360 : 600,
         }}>
-        <View style={{width: isPortrait ? '100%' : '50%'}}>
-          <StatComponent type={'health'} />
+        <Court isPortrait={isPortrait} />
+
+        <View
+          style={{
+            ...styles.statsWrapper,
+            flexDirection: isPortrait ? 'column' : 'row',
+          }}>
+          <View style={{width: isPortrait ? '100%' : '50%'}}>
+            <StatComponent type={'health'} />
+          </View>
+
+          <View style={{width: isPortrait ? '100%' : '50%'}}>
+            <StatComponent type={'weapon'} />
+          </View>
         </View>
 
-        <View style={{width: isPortrait ? '100%' : '50%'}}>
-          <StatComponent type={'weapon'} />
-        </View>
+        <GlobalAction />
       </View>
-
-      <GlobalAction />
     </View>
   ) : (
     <TouchableHighlight onPress={handleRefresh} style={{flex: 1}}>
@@ -77,8 +84,15 @@ export const Main = () => {
 const styles = StyleSheet.create({
   main: {
     flex: 1,
-    justifyContent: 'space-between',
+    justifyContent: 'center',
+    alignItems: 'center',
     backgroundColor: 'black',
+    paddingTop: 20,
+    paddingBottom: 20,
+  },
+  body: {
+    flex: 1,
+    justifyContent: 'space-between',
   },
   statsWrapper: {
     display: 'flex',

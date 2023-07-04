@@ -72,10 +72,11 @@ const baseSlice = createSlice<
       state.weapon = new_stat < 0 ? 0 : new_stat;
     },
     setNewFace(state, action: PayloadAction<keyof Faces>) {
+      const faceIsLive = state.faces[action.payload];
       const type = action.payload.split('_')[0] as Face;
 
-      state.health = state.stats[type].health;
-      state.weapon = state.stats[type].weapon;
+      state.health = faceIsLive ? state.stats[type].health : 0;
+      state.weapon = faceIsLive ? state.stats[type].weapon : 0;
       state.currentFace = action.payload;
     },
     setFaceState(
@@ -85,7 +86,10 @@ const baseSlice = createSlice<
       state.faces[action.payload.name] = action.payload.state;
     },
     killFace(state) {
-      state.faces[state.currentFace] = false;
+      if (state.currentFace in state.faces) {
+        state.faces[state.currentFace] = false;
+      }
+
       state.health = 0;
       state.weapon = 0;
       state.currentFace = null;

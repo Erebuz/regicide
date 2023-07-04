@@ -6,4 +6,10 @@ export const globalStyles = StyleSheet.create({
     borderRadius: 10,
     backgroundColor: 'lightblue',
   },
+  icon: {
+    color: 'black',
+  },
+  iconStat: {
+    color: 'red',
+  },
 });
