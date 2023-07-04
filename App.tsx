@@ -11,8 +11,10 @@ import {SafeAreaView, StatusBar, StyleSheet} from 'react-native';
 import {Main} from './src/Main';
 import {Provider} from 'react-redux';
 import {store} from './src/redux/store';
+import {Immersive} from 'react-native-immersive';
 
 function App(): JSX.Element {
+  Immersive.on();
   return (
     <Provider store={store}>
       <SafeAreaView style={styles.view}>

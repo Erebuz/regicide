@@ -6193,6 +6193,11 @@
   "resolved" "https://registry.npmjs.org/react-is/-/react-is-17.0.2.tgz"
   "version" "17.0.2"
 
+"react-native-immersive@^2.0.0":
+  "integrity" "sha512-9TL05nTHN/x9sN1wbUlBoGyzH4NCuZ/7WEEUp5CvOoKuUABvdYosov0O0SAMbm/5J913RRoy98VB6tGNi9lRSw=="
+  "resolved" "https://registry.npmjs.org/react-native-immersive/-/react-native-immersive-2.0.0.tgz"
+  "version" "2.0.0"
+
 "react-native-svg-app-icon@^0.6.1":
   "integrity" "sha512-x8HPUrr5WIzvr4ffttkYPuUyivYMtr/Uj9sw086DZan43qa5pjlzpIT5+l8h0lp0FV/BYM+8EW4AjoxzhIwqgQ=="
   "resolved" "https://registry.npmjs.org/react-native-svg-app-icon/-/react-native-svg-app-icon-0.6.1.tgz"
@@ -6211,7 +6216,7 @@
     "prop-types" "^15.7.2"
     "yargs" "^16.1.1"
 
-"react-native@*", "react-native@>=0.59", "react-native@0.72.1":
+"react-native@*", "react-native@>=0.47.0", "react-native@>=0.59", "react-native@0.72.1":
   "integrity" "sha512-O9cIVD++kt2XQl0XLCUGUgwSKr8xp+yo0ho5QK6KYWJrCFnnvQLTKL0+HD0rZUcuqFfGknHQJh3h0moQO2EMDg=="
   "resolved" "https://registry.npmjs.org/react-native/-/react-native-0.72.1.tgz"
   "version" "0.72.1"
