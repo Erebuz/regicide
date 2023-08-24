@@ -95,7 +95,9 @@ const baseSlice = createSlice<
       state.currentFace = null;
     },
     restoreFace(state) {
-      state.faces[state.currentFace] = true;
+      if (state.currentFace in state.faces) {
+        state.faces[state.currentFace] = true;
+      }
     },
     refreshAll(state) {
       for (const key in state.faces) {
